@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holi 2025 - Festival of Colors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .holi-heading {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            text-align: center;
+            margin: 2rem 0;
+            background: linear-gradient(45deg, #ff0000, #ffff00, #00ff00, #0000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .color-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: particle 4s linear infinite;
+        }
+
+        @keyframes particle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .holi-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            animation: cardEntrance 1s ease-out;
+        }
+
+        .holi-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @keyframes cardEntrance {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .color-text {
+            animation: colorChange 2s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: #ff0000; }
+            25% { color: #ffd700; }
+            50% { color: #00ff00; }
+            75% { color: #00bfff; }
+            100% { color: #ff69b4; }
+        }
+
+        .firework {
+            position: absolute;
+            font-size: 2rem;
+            animation: explode 1.5s ease-out;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        .balloon {
+            position: fixed;
+            width: 50px;
+            height: 70px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: floatUp 5s ease-in forwards;
+            bottom: -100px;
+            opacity: 0.9;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: rgba(0,0,0,0.2);
+            transform: translateX(-50%);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            50% { transform: translateY(-100vh) translateX(20px); }
+            100% { transform: translateY(-200vh) translateX(-20px); opacity: 0; }
+        }
+
+        .mode-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: btnShine 3s infinite;
+        }
+
+        @keyframes btnShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-family: 'Pacifico', cursive;
+            z-index: 1000;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            animation: watermarkFade 4s infinite;
+        }
+
+        @keyframes watermarkFade {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="holi-heading">Happy Holi 2025!</h1>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="holi-card p-5 text-center">
+                    <p class="fs-3 color-text">
+                        May your life be filled with vibrant colors of joy, happiness, and love! 🌈
+                    </p>
+                    <button class="btn btn-lg btn-danger mode-btn mt-3" id="effectButton">
+                        Launch Fireworks! 🎆
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <p class="text-white fs-4 mt-3" id="dynamicText"></p>
+        </div>
+    </div>
+
+    <div class="watermark">Made with 💖 by @yours.surajj</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let isBalloonMode = false;
+        const messages = [
+            "Let's spread happiness with colors!",
+            "Drench in the colors of joy!",
+            "Forget worries, play with colors!",
+            "Happy Holi from our family to yours!",
+            "May your Holi be bright and beautiful!"
+        ];
+        let currentMessage = 0;
+
+        // Initialize effects
+        createParticles();
+        setInterval(createParticles, 5000);
+        setInterval(updateText, 3000);
+
+        // Effect button handler
+        document.getElementById('effectButton').addEventListener('click', function() {
+            isBalloonMode = !isBalloonMode;
+            this.textContent = isBalloonMode ? "Release Balloons! 🎈" : "Launch Fireworks! 🎆";
+            this.classList.toggle('btn-danger');
+            this.classList.toggle('btn-primary');
+            
+            if(isBalloonMode) {
+                createBalloons(25);
+            } else {
+                createFireworks();
+            }
+        });
+
+        function createParticles() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+            for(let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'color-particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 4000);
+            }
+        }
+
+        function createFireworks() {
+            const emojis = ['🎆', '✨', '🎇', '💥', '🌸'];
+            for(let i = 0; i < 20; i++) {
+                const firework = document.createElement('span');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 100 + 'vw';
+                firework.style.top = Math.random() * 100 + 'vh';
+                firework.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(firework);
+                setTimeout(() => firework.remove(), 1500);
+            }
+        }
+
+        function createBalloons(count) {
+            for(let i = 0; i < count; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                balloon.style.animationDuration = 5 + Math.random() * 3 + 's';
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 8000);
+            }
+        }
+
+        function updateText() {
+            document.getElementById('dynamicText').style.animation = 'textFade 1s';
+            document.getElementById('dynamicText').textContent = messages[currentMessage];
+            currentMessage = (currentMessage + 1) % messages.length;
+        }
+    </script>
+</body>
+</html>
