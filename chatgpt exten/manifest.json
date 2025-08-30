@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ParadoxXchatGPT",
+  "version": "1.0",
+  "description": "Search selected text or describe images on ChatGPT",
+  "permissions": [
+    "contextMenus",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://chatgpt.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
