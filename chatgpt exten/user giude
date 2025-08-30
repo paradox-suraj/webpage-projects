@@ -1,0 +1,8 @@
+HOW to use 
+Open Chrome and navigate to chrome://extensions/
+
+Enable "Developer mode" (toggle in top-right corner)
+
+Click "Load unpacked"
+
+Select the project folder containing your files
